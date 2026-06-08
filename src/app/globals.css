@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+/* ─────────────────────────── BRAND TOKENS ─────────────────────────── */
+:root {
+  /* Surfaces — warm ivory ground inspired by editorial paper stock */
+  --paper:       #F4EFE6;
+  --paper-soft:  #FBF6EC;
+  --paper-deep:  #EAE1CF;
+  --paper-edge:  #DCD2BC;
+
+  /* Ink — deep blue-black, not pure black */
+  --ink:         #0E1A22;
+  --ink-2:       #34414E;
+  --ink-soft:    #6C7884;
+  --hairline:    #D5CBB6;
+
+  /* Brand accent — sampled from the logo's S */
+  --azur:        #1B9DEE;
+  --azur-deep:   #0E6EBE;
+  --azur-soft:   #95CFF1;
+
+  /* Editorial warm accent — used very sparingly for marginalia / marks */
+  --terracotta:      #C9633F;
+  --terracotta-soft: #E6A98E;
+}
+
+@theme inline {
+  --color-paper:           var(--paper);
+  --color-paper-soft:      var(--paper-soft);
+  --color-paper-deep:      var(--paper-deep);
+  --color-paper-edge:      var(--paper-edge);
+  --color-ink:             var(--ink);
+  --color-ink-2:           var(--ink-2);
+  --color-ink-soft:        var(--ink-soft);
+  --color-hairline:        var(--hairline);
+  --color-azur:            var(--azur);
+  --color-azur-deep:       var(--azur-deep);
+  --color-azur-soft:       var(--azur-soft);
+  --color-terracotta:      var(--terracotta);
+  --color-terracotta-soft: var(--terracotta-soft);
+
+  --font-sans:    var(--font-geist);
+  --font-display: var(--font-fraunces);
+}
+
+/* ─────────────────────────── BASE ─────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-geist), system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--ink); color: var(--paper-soft); }
+
+/* ─────────────────────── TYPE UTILITIES ─────────────────────── */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-optical-sizing: auto;
+}
+.italic-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+.section-mark {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--terracotta);
+  letter-spacing: 0.02em;
+}
+.t-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.t-mega {
+  font-size: clamp(3rem, 8.4vw, 7.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+.t-display {
+  font-size: clamp(2.25rem, 5vw, 3.85rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+.font-numeral {
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ─────────────────────────── LAYOUT ─────────────────────────── */
+.container-thin {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+@media (min-width: 768px)  { .container-thin { padding-inline: 2.5rem; } }
+@media (min-width: 1280px) { .container-thin { padding-inline: 3.5rem; } }
+
+.hairline { display: block; height: 0; border: 0; border-top: 1px solid var(--hairline); }
+
+/* ─────────────────────── ATMOSPHERE ─────────────────────── */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.10 0 0 0 0 0.13 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+/* ─────────────────────── BUTTONS ─────────────────────── */
+.btn-ink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.7rem;
+  background: var(--ink);
+  color: var(--paper-soft);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-ink:hover {
+  background: var(--azur-deep);
+  border-color: var(--azur-deep);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.7rem;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper-soft);
+  border-color: var(--ink);
+}
+
+/* ─────────────────────── LINK / UNDERLINE ─────────────────────── */
+.link-hairline { position: relative; transition: color 0.3s; }
+.link-hairline::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-hairline:hover::after { transform: scaleX(1); }
+
+/* ─────────────────────── ANIMATIONS ─────────────────────── */
+@keyframes fade-rise {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.fade-rise {
+  opacity: 0;
+  animation: fade-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slow-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.85); }
+}
+.pulse-dot { animation: slow-pulse 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-rise { animation: none; opacity: 1; transform: none; }
+  .pulse-dot { animation: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
